@@ -17,7 +17,7 @@ namespace LinkedList
         {
             if (start == null)
             {
-                Console.WriteLine("List is empty!");
+                Console.WriteLine("List is empty!\n");
             }
             else
             {
