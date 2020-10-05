@@ -8,8 +8,54 @@ namespace LinkedList
         {
             SingleLinkedList linkedList = new SingleLinkedList();
 
+            int userInput = -1;
+
+            do
+            {
+                userInput = DisplayMenu();
+
+                switch (userInput)
+                {
+                    case 1: // create list
+
+                        break;
+                    case 2: // display list
+
+                        break;
+                    case 3: // add/remove at beginning of the list
+
+                        break;
+                    case 4: // add/remove at end of the list
+
+                        break;
+                    case 5: // add/remove nth position
+
+                        break;
+                    case 6: // reverse list
+
+                        break;
+                    case 7: // bubble sort data
+
+                        break;
+                    case 8: // bubble sort links
+
+                        break;
+                    case 9: // insert cycle
+
+                        break;
+                    case 10: // detect cycle
+
+                        break;
+                    case 11: // remove cycle
+
+                        break;
+                    default:
+                        Console.WriteLine("\nInvalid number!\n");
+                        break;
+                }
+            } while (userInput != 0);
            
-            for (int i = 1; i < 5; i++)
+            /*for (int i = 1; i < 5; i++)
             {
                 linkedList.insertAtTheEnd(i);
             }
@@ -25,13 +71,37 @@ namespace LinkedList
             linkedList.removeCycle();
 
             linkedList.DisplayList();
-
+            
             Console.ReadKey();
+            */
         }
 
-        static void Print(int val)
+        static int DisplayMenu()
         {
-            Console.WriteLine(val);
+            Console.WriteLine("Operations: ");
+            Console.WriteLine("1) Creating a new Single Linked List");
+            Console.WriteLine("2) Displaying the list");
+            Console.WriteLine("3) Adding / Removing an element at the beginning of the list");
+            Console.WriteLine("4) Adding / Removing an element at the end of the list");
+            Console.WriteLine("5) Adding / Removing an element at the nth position");
+            Console.WriteLine("6) Reverse the List");
+            Console.WriteLine("7) Bubble Sort by exchanging data");
+            Console.WriteLine("8) Bubble Sort by exchanging links");
+            Console.WriteLine("9) Insert Cycle");
+            Console.WriteLine("10) Detect Cycle");
+            Console.WriteLine("11) Remove Cycle");
+            Console.WriteLine("0) Exit");
+            Console.WriteLine();
+
+            string c;
+            int result;
+
+            do
+            {
+                c = Console.ReadLine();
+            } while (!Int32.TryParse(c, out result));
+
+            return result;
         }
     }
 }
