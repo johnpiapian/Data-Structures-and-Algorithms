@@ -19,10 +19,14 @@ namespace LinkedList
                 switch (userInput)
                 {
                     case 1: // create list
-                        for (int i = 0; i < 5; i++)
+
+                        int size = getNumber("Enter the number of elements you would like to add: ");
+
+                        for (int i = 1; i <= size; i++)
                         {
-                            linkedList.insertAtTheEnd(i);
+                            linkedList.insertAtTheEnd(getNumber("Enter value for element " + i + ": "));
                         }
+
                         break;
                     case 2: // display list
                         linkedList.DisplayList();
@@ -31,12 +35,29 @@ namespace LinkedList
                         switch (getNumber("1) Add \n2) Remove \n3) Back \n"))
                         {
                             case 1:
-
+                                try
+                                {
+                                    linkedList.insertAtTheBeginning(getNumber("Enter value to be entered: "));
+                                    Console.WriteLine("Successfully added element.");
+                                }
+                                catch (Exception ex)
+                                {
+                                    Console.WriteLine("Unexpected error encountered:" + ex.Message);
+                                }
                                 break;
                             case 2:
-                                Console.WriteLine("Remove node at nth position.");
+                                try
+                                {
+                                    linkedList.deleteFirstNode();
+                                    Console.WriteLine("Successfully removed element.");
+                                }
+                                catch (Exception ex)
+                                {
+                                    Console.WriteLine("Unexpected error encountered:" + ex.Message);
+                                }
                                 break;
                             case 3:
+                                // going back to main menu
                                 break;
                             default:
                                 Console.WriteLine("Invalid number!");
@@ -44,19 +65,62 @@ namespace LinkedList
                         }
                         break;
                     case 4: // add/remove at end of the list
-
-                        break;
-                    case 5: // add/remove nth position
-                        //int number = getNumber("Enter the position of the node you would like to remove: ");
-                        //Console.WriteLine("Your number is " + number);
-
                         switch (getNumber("1) Add \n2) Remove \n3) Back \n"))
                         {
                             case 1:
-                                Console.WriteLine("Add node at nth position.");
+                                try
+                                {
+                                    linkedList.insertAtTheEnd(getNumber("Enter value to be entered: "));
+                                    Console.WriteLine("Successfully added element.");
+                                }
+                                catch (Exception ex)
+                                {
+                                    Console.WriteLine("Unexpected error encountered:" + ex.Message);
+                                }
                                 break;
                             case 2:
-                                Console.WriteLine("Remove node at nth position.");
+                                try
+                                {
+                                    linkedList.deleteLastNode();
+                                    Console.WriteLine("Successfully removed element.");
+                                }
+                                catch (Exception ex)
+                                {
+                                    Console.WriteLine("Unexpected error encountered:" + ex.Message);
+                                }
+                                break;
+                            case 3:
+                                // going back to main menu
+                                break;
+                            default:
+                                Console.WriteLine("Invalid number!");
+                                break;
+                        }
+                        break;
+                    case 5: // add/remove nth position
+                        switch (getNumber("1) Add \n2) Remove \n3) Back \n"))
+                        {
+                            case 1:
+                                try
+                                {
+                                    linkedList.insertAtIndex(getNumber("Enter position: "), getNumber("Enter value: "));
+                                    Console.WriteLine("Successfully added element.");
+                                }
+                                catch (Exception ex)
+                                {
+                                    Console.WriteLine("Unexpected error encountered:" + ex.Message);
+                                }
+                                break;
+                            case 2:
+                                try
+                                {
+                                    linkedList.deleteAtIndex(getNumber("Enter position: "));
+                                    Console.WriteLine("Successfully removed element.");
+                                }
+                                catch (Exception ex)
+                                {
+                                    Console.WriteLine("Unexpected error encountered:" + ex.Message);
+                                }
                                 break;
                             case 3:
                                 break;
@@ -76,7 +140,6 @@ namespace LinkedList
                         {
                             Console.WriteLine("Unexpected error encountered:" + ex.Message);
                         }
-
                         break;
                     case 7: // bubble sort data
                         try
@@ -103,8 +166,8 @@ namespace LinkedList
                     case 9: // insert cycle
                         try
                         {
-                            // ask for valuue
-                            linkedList.insertCycle(1);
+  
+                            linkedList.insertCycle(getNumber("Enter element value: "));
                             Console.WriteLine("Successfully inserted cycle.");
                         }
                         catch (Exception ex)
@@ -141,27 +204,6 @@ namespace LinkedList
                         break;
                 }
             } while (userInput != 0);
-
-            /*
-            for (int i = 1; i < 5; i++)
-            {
-                linkedList.insertAtTheEnd(i);
-            }
-
-            linkedList.DisplayList();
-
-            linkedList.insertAtIndex(1, 10);
-            linkedList.insertAfter(1, 5123);
-
-            //linkedList.reserveList();
-            linkedList.insertCycle(1);
-            Console.WriteLine(linkedList.hasCycle());
-            linkedList.removeCycle();
-
-            linkedList.DisplayList();
-            
-            Console.ReadKey();
-            */
         }
 
         static int DisplayMenu()
@@ -187,6 +229,7 @@ namespace LinkedList
 
             do
             {
+                Console.Write("Operation code: ");
                 c = Console.ReadLine();
             } while (!Int32.TryParse(c, out result));
 
