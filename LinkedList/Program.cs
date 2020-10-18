@@ -29,7 +29,14 @@ namespace LinkedList
 
                         break;
                     case 2: // display list
-                        linkedList.DisplayList();
+                        if (linkedList.hasCycle())
+                        {
+                            Console.WriteLine("Please remove cycle before displaying the list.");
+                        }
+                        else
+                        {
+                            linkedList.DisplayList();
+                        }
                         break;
                     case 3: // add/remove at beginning of the list
                         switch (getNumber("1) Add \n2) Remove \n3) Back \n"))
