@@ -17,10 +17,10 @@ namespace Queue
 
                 switch (userInput)
                 {
-                    case 1: // Push
+                    case 1: // insert
                         queue.Insert(getNumber("Enter value: "));
                         break;
-                    case 2: // Pop
+                    case 2: // delete
                         try
                         {
                             queue.Delete();
@@ -33,7 +33,7 @@ namespace Queue
                     case 3:// get size
                         output(queue.Size().ToString());
                         break;
-                    case 4:// get top
+                    case 4:// get front
                         try
                         {
                             output(queue.Peek().ToString());
