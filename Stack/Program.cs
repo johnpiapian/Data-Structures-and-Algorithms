@@ -6,8 +6,14 @@ namespace Stack
     {
         static void Main(string[] args)
         {
-            ArrayImplementation stack = new ArrayImplementation(5);
+            //ArrayImplementation stack = new ArrayImplementation(5);
+            LinkedListImplementation stack = new LinkedListImplementation();
 
+            Start(stack);
+        }
+
+        static void Start(dynamic stack)
+        {
             int userInput = -1;
 
             do
@@ -51,7 +57,6 @@ namespace Stack
                         break;
                 }
             } while (userInput != 0);
-
         }
 
         static int DisplayMenu()
