@@ -17,7 +17,7 @@ namespace Final_Project
 
         public void DisplayList()
         {
-            if (start == null)
+            if (start == null) 
             {
                 Console.WriteLine("List is empty!\n");
             }
@@ -27,10 +27,9 @@ namespace Final_Project
 
                 Console.WriteLine("Firstname\t Lastname\t Student Id");
                 Console.WriteLine("--------------------------------------------");
-                while (p != null)
+                while (p != null) // O(n) n -> size of the list
                 {
                     Student _student = p.data;
-                    // Console.WriteLine($"{_student.FName}      \t{_student.LName}\t\t{_student.SID}");
                     Console.WriteLine(_student.ToString());
                     p = p.link;
                 }
@@ -46,37 +45,41 @@ namespace Final_Project
             }
             else
             {
-                Node p = start;
 
-                Console.WriteLine("Firstname\t Lastname\t Student Id");
-                Console.WriteLine("--------------------------------------------");
-                while (p != null)
+                if(type >= 1 && type <= 2)
                 {
-                    switch (type)
+                    Node p = start;
+                    Console.WriteLine("Firstname\t Lastname\t Student Id");
+                    Console.WriteLine("--------------------------------------------");
+                    while (p != null) // O(n)
                     {
-                        case 1:
-                            if (p.data.FName.Contains(text))
-                            {
-                                Console.WriteLine(p.data.ToString());
-                            }
-                            break;
-                        case 2:
-                            if (p.data.LName.Contains(text))
-                            {
-                                Console.WriteLine(p.data.ToString());
-                            }
-                            break;
-                        default:
-                            Console.WriteLine("Invalid type!\n");
-                            break;
+                        switch (type)
+                        {
+                            case 1:
+                                if (p.data.FName.Contains(text))
+                                {
+                                    Console.WriteLine(p.data.ToString());
+                                }
+                                break;
+                            case 2:
+                                if (p.data.LName.Contains(text))
+                                {
+                                    Console.WriteLine(p.data.ToString());
+                                }
+                                break;
+                        }
+                        p = p.link;
                     }
-                    p = p.link;
+                    Console.WriteLine();
                 }
-                Console.WriteLine();
+                else
+                {
+                    Console.WriteLine("\nInvalid type!\n");
+                }
             }
         }
 
-        public void Insert(Student data)
+        public void Insert(Student data) // O(1) or O(n) normally, but this is always O(n)
         {
             Node p;
             Node temp = new Node(data);
@@ -100,25 +103,35 @@ namespace Final_Project
 
         public void Remove(int _sid)
         {
-            Node p = start;
+            Node p = start, q = start; // p -> current, q -> previous
 
-            while (p != null)
+            while (p != null) // O(n) or O(1)
             {
                 if (p.data.SID.Equals(_sid))
                 {
                     break;
                 }
 
+                q = p;
                 p = p.link;
             }
 
             if (p == null)
             {
-                Console.WriteLine("Student could not be found in the list.\n");
+                Console.WriteLine("\nStudent could not be found in the list.\n");
             }
             else
             {
-                Console.WriteLine("Successfully removed!\n");
+                if (q.data.SID.Equals(p.data.SID)) // if it's the first node
+                {
+                    start = start.link;
+                }
+                else
+                {
+                    q.link = p.link;
+                }
+
+                Console.WriteLine("\nSuccessfully removed!\n");
             }
         }
 
@@ -126,7 +139,7 @@ namespace Final_Project
         {
             Node p = start;
 
-            while (p != null)
+            while (p != null) // O(n)
             {
                 if (p.data.SID.Equals(_sid))
                 {
@@ -138,7 +151,7 @@ namespace Final_Project
 
             if (p == null)
             {
-                Console.WriteLine("Student could not be found in the list.\n");
+                Console.WriteLine("\nStudent could not be found in the list.\n");
             }
             else
             {
@@ -152,7 +165,7 @@ namespace Final_Project
         {
             Node p = start;
 
-            while (p != null)
+            while (p != null) // O(n)
             {
                 if (p.data.SID.Equals(_sid))
                 {
@@ -172,14 +185,14 @@ namespace Final_Project
             }
         }
 
-        // Sort in ascending order by an attribute
-        public void Sort(int attribute)
+        // (Bubble)Sort in ascending order by an attribute
+        public void Sort(int attribute) 
         {
             if(attribute >= 1 && attribute <= 3) // Number of attributes (fname, lname, sid)
             {
                 Node end, p, q; // p -> current, q -> next
 
-                for (end = null; end != start.link; end = p)
+                for (end = null; end != start.link; end = p) // O(n^2)
                 {
                     for (p = start; p.link != end; p = p.link)
                     {
@@ -214,30 +227,25 @@ namespace Final_Project
                     }
                 }
             }
-            else
-            {
-                return;
-            }
         }
 
-        // Unused
-        public void BubbleSort()
+        public void ReverseList() // descending order
         {
-            Node end, p, q; // p -> current, q -> next
+            Node prev, p, next;
 
-            for (end = null; end != start.link; end = p)
+            prev = null;
+            p = start;
+
+            while (p != null) // O(n)
             {
-                for (p = start; p.link != end; p = p.link)
-                {
-                    q = p.link;
-                    if (String.Compare(p.data.FName, q.data.FName) > 0)
-                    {
-                        Student temp = p.data;
-                        p.data = q.data;
-                        q.data = temp;
-                    }
-                }
+                next = p.link;
+                p.link = prev;
+                prev = p;
+                p = next;
             }
+
+            start = prev;
+
         }
 
     }
